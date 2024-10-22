@@ -1,0 +1,5 @@
+.env
+.venv/
+form_data.db
+__pycache__
+templates/
