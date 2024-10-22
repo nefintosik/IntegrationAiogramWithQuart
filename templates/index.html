@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма обратной связи</title>
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();  // Останавливаем стандартную отправку формы
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Отправляем данные формы с помощью fetch
+            const response = await fetch('/submit-form', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                // Очищаем форму
+                form.reset();
+
+                // Отображаем сообщение об успехе
+                const messageBox = document.getElementById('message-box');
+                messageBox.innerText = 'Форма была успешно отправлена!';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Свяжитесь с нами</h1>
+    
+    <!-- Сообщение после успешной отправки -->
+    <div id="message-box" style="color: green; font-weight: bold;"></div>
+
+    <!-- Форма с обработчиком на отправку -->
+    <form onsubmit="handleSubmit(event)">
+        <label for="name">Имя:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Почта:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Номер телефона:</label><br>
+        <input type="tel" id="phone" name="phone" required><br><br>
+
+        <label for="phone">Ваш телеграм:</label><br>
+        <input type="tg" id="tg" name="tg" required><br><br>
+
+        <label for="message">Сообщение:</label><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+        <input type="submit" value="Отправить">
+    </form>
+</body>
+</html>
