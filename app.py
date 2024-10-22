@@ -33,8 +33,7 @@ async def send_message(text):
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: Message):
-    await message.answer("Привет! Теперь я могу отправлять сообщения в группу.")
-    print(f"Chat ID пользователя {message.from_user.username}: {message.chat.id}")
+    await message.answer("Привет, как только придёт сообщения с сайта я отправлю его сюда, в группу!")
 
 @app.route('/submit-form', methods=['POST'])
 async def submit_form():
